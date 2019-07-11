@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+
+      <h3>v-for参数</h3>
+      <ul >
+          <li v-for="item in items">
+              {{ item.message }}
+          </li>
+      </ul>
+
+
+      <!--
+        支持可选的第二个参数,即当前项的索引
+
+        在v-for的块中,可以访问所有父作用域属性,如父作用域中的message
+      -->
+      <ul>
+          <li v-for="(item, index) in items">
+              {{ message }} - {{ index }} - {{ item.message }}
+          </li>
+      </ul>
+
+      <h3>用of代替in</h3>
+      <!--你可以用of代替in-->
+      <ul >
+          <li v-for="item of items">
+              {{ item.message }}
+          </li>
+      </ul>
+
+      <h3>v-for使用对象</h3>
+      <!--在v-for中使用对象-->
+      <!--一个参数-->
+      <ul>
+          <li v-for="value in object">
+              {{ value }}
+          </li>
+      </ul>
+
+      <!--两个参数-->
+      <ul>
+          <li v-for="(value, key) in object">
+             {{ key }}: {{ value }}
+          </li>
+      </ul>
+
+      <!--三个参数-->
+      <ul>
+          <li v-for="(value, key, index) in object">
+              {{ index }}. {{ key }}: {{ value }}
+          </li>
+      </ul>
+
+      <!--
+        数组更新检测
+      -->
+      <h3>数组更新检测</h3>
+
+      <h4>变异方法</h4>
+      <ul>
+          <li v-for="(item, index) in list">
+              {{index}}. {{item}}
+          </li>
+      </ul>
+
+      <div>
+          <button type="button" v-on:click="pushList">push</button>
+          <button type="button" v-on:click="popList">pop</button>
+          <button type="button" v-on:click="shiftList">shift</button>
+          <button type="button" v-on:click="unshiftList">unshift</button>
+          <button type="button" v-on:click="spliceList">splice</button>
+          <button type="button" v-on:click="sortList">sort</button>
+      </div>
+
+      <h4>替换数组</h4>
+
+
+
+  </div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            message: "hello",
+            items: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ],
+            object: {
+                title: 'How to do lists in Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            },
+            list: [
+                "hello",
+                "world"
+            ]
+        },
+        methods: {
+            pushList: function () {
+                this.list.push("hello")
+            },
+            popList: function () {
+                this.list.pop()
+            },
+            shiftList: function () {
+                this.list.shift()
+            },
+            unshiftList: function () {
+                this.list.unshift("hello")
+            },
+            spliceList: function () {
+                this.list.splice(0, 1)
+            },
+            sortList: function () {
+                this.list.sort()
+            }
+        }
+    })
+</script>
+</body>
+</html>
